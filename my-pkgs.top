@@ -1,0 +1,6 @@
+# install my-pkgs on all versions of Fedora and Fedora-minimal
+base:
+  fedora-??:
+    - my-pkgs
+  fedora-??-minimal:
+    - my-pkgs
