@@ -13,4 +13,6 @@ I've spent many hours trying to get this to work, and helping other users who ha
 # The solution
 
 We're working on that...
+https://github.com/QubesOS/qubes-issues/issues/8218
+
 -@zaz & @kennethrrosen
