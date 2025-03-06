@@ -1,0 +1,18 @@
+user:
+  {% set vm_dirs = salt['cp.list_master_dirs']('user', 'copy-to-vm') %}
+  {% set vms = [] %}
+
+  {% for vm_dir in vm_dirs %}
+    {% if vm_dir.startswith('copy-to-vm/') %}
+      # append the part after the first slash
+      {% set path = vm_dir.split('/') %}
+      {% if path|length == 2 %}
+        {% do vms.append(path[1]) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% for vm in vms %}
+  '{{ vm }}':
+    - copy-to-vm
+  {% endfor %}
