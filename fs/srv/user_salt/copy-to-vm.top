@@ -1,7 +1,19 @@
-user:
-  {% set dirs = salt['cp.list_master_dirs']('user', 'copy-to/vm') %}
+{% set dirs = salt['cp.list_master_dirs']('user', 'copy-to/vm') %}
+{% set matching_dirs = [] %}
+{% for dir in dirs if dir.startswith('copy-to/vm/') and dir.count('/') == 2 %}
+  {% do matching_dirs.append(dir.split('/')[2]) %}
+{% endfor %}
 
-  {% for dir in dirs if dir.startswith('copy-to/vm/') and dir.count('/') == 2 %}
-  '{{ dir.split('/')[2] }}':
+{% if matching_dirs %}
+user:
+  {% for dir in matching_dirs %}
+  '{{ dir }}':
     - copy-to-vm
   {% endfor %}
+{% else %}
+{# If there are no directories, don't throw an error. #}
+base:
+  dom0:
+    {# do nothing #}
+    - topd
+{% endif %}
