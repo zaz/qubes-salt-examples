@@ -2,7 +2,7 @@
 
 /:
   file.recurse:
-    - source: salt://copy-to-vm/{{ vm }}/
+    - source: salt://copy-to/vm/{{ vm }}/
     # make any parent directories that don't exist
     - makedirs: True
     # copy empty directories

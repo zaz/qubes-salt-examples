@@ -1,7 +1,7 @@
 user:
-  {% set dirs = salt['cp.list_master_dirs']('user', 'copy-to-vm') %}
+  {% set dirs = salt['cp.list_master_dirs']('user', 'copy-to/vm') %}
 
-  {% for dir in dirs if dir.startswith('copy-to-vm/') and dir.count('/') == 1 %}
-  '{{ dir.split('/')[1] }}':
+  {% for dir in dirs if dir.startswith('copy-to/vm/') and dir.count('/') == 2 %}
+  '{{ dir.split('/')[2] }}':
     - copy-to-vm
   {% endfor %}
