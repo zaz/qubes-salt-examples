@@ -11,3 +11,7 @@ For example, if you create `fedora-41-xfce/etc/profile.d/aliases.sh`,
 that file will be copied to `/etc/profile.d/aliases.sh` on your
 fedora-41-xfce template, making your command-line shortcuts available
 on all Qubes based on fedora-41-xfce.
+
+Note that all files will be created with mode 0755. If you want a different
+mode, you will have to use a separate SALT state. Due to `qvm-copy` not copying
+permissions, SALT's `file_mode: keep` does not work.

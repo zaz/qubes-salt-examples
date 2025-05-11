@@ -8,7 +8,7 @@
     # copy empty directories
     - include_empty: True
     # copy each file's permissions
-    - file_mode: keep
+    - file_mode: 755
     # copy each symlink's permissions
     - sym_mode: keep
 
