@@ -3,6 +3,5 @@ user:
 
   {% for dir in dirs if dir.startswith('copy-to-vm/') and dir.count('/') == 1 %}
   '{{ dir.split('/')[1] }}':
-    - match: pcre
     - copy-to-vm
   {% endfor %}
