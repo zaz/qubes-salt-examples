@@ -1,0 +1,20 @@
+{% set dirs = salt['cp.list_master_dirs']('user', 'copy-to/pcre') %}
+{% set matching_dirs = [] %}
+{% for dir in dirs if dir.startswith('copy-to/pcre/') and dir.count('/') == 2 %}
+  {% do matching_dirs.append(dir.split('/')[2]) %}
+{% endfor %}
+
+{% if matching_dirs %}
+user:
+  {% for dir in matching_dirs %}
+  '{{ dir }}':
+    - match: pcre
+    - copy-to-pcre
+  {% endfor %}
+{% else %}
+{# If there are no directories, don't throw an error. #}
+base:
+  dom0:
+    {# do nothing #}
+    - topd
+{% endif %}
